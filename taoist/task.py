@@ -3,6 +3,7 @@ import sys
 import os
 import argparse
 from pathlib import Path
+from tabulate import tabulate
 from configparser import ConfigParser
 from todoist_api_python.api import TodoistAPI
 
@@ -18,5 +19,8 @@ def run_task(args: argparse.ArgumentParser) -> None:
     api = TodoistAPI(config['Default']['token'])
     tasks = api.get_tasks()
     if args.subcommand == "list":
+        task_list = [["id", "content", "status", "due"],]
         for task in tasks:
-            print(task.id, "\t", task.content, "\t", task.completed, "\t", task.due.string)
+            row = [task.id, task.content, task.completed, task.due.string]
+            task_list.append(row)
+        print(tabulate(task_list, headers="firstrow"))

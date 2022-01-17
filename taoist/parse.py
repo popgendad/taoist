@@ -38,21 +38,21 @@ def parse_args() -> argparse.ArgumentParser:
     # Parse project/create
     project_create_subparser = project_subparser.add_parser("create", help="create project")
     project_create_subparser.add_argument(
-        "input",
+        "name",
         action="store",
-        metavar="INPUT_FILE",
+        metavar="NAME",
         type=str,
-        help="file with merged bcsys output JSON files",
+        help="name of new project to create",
     )
 
     # Parse project/delete
     project_delete_subparser = project_subparser.add_parser("delete", help="delete project")
     project_delete_subparser.add_argument(
-        "input",
+        "id",
         action="store",
-        metavar="INPUT_FILE",
+        metavar="PROJECT_ID",
         type=str,
-        help="file with merged bcsys output JSON files",
+        help="id of project to delete",
     )
 
     # Define parser for task function
@@ -66,71 +66,84 @@ def parse_args() -> argparse.ArgumentParser:
     # Parse task/list
     task_list_subparser = task_subparser.add_parser("list", help="list tasks")
     task_list_subparser.add_argument(
-        "input",
-        action="store",
-        metavar="INPUT_FILE",
-        type=str,
-        help="file with merged bcsys output JSON files",
+        "--sort",
+        action="store_true",
+        help="sort tasks by due date",
     )
 
     # Parse task/create
     task_create_subparser = task_subparser.add_parser("create", help="create task")
     task_create_subparser.add_argument(
-        "input",
+        "project",
         action="store",
-        metavar="INPUT_FILE",
+        metavar="PROJECT",
         type=str,
-        help="file with merged bcsys output JSON files",
+        default="Inbox",
+        help="create task in given project [default: Inbox]",
     )
 
     # Parse task/delete
     task_delete_subparser = task_subparser.add_parser("delete", help="delete task")
     task_delete_subparser.add_argument(
-        "input",
+        "id",
         action="store",
-        metavar="INPUT_FILE",
+        metavar="TASK_ID",
         type=str,
-        help="file with merged bcsys output JSON files",
+        help="delete task",
     )
 
     # Parse task/edit
     task_edit_subparser = task_subparser.add_parser("edit", help="edit task")
     task_edit_subparser.add_argument(
-        "input",
+        "id",
         action="store",
-        metavar="INPUT_FILE",
+        metavar="TASK_ID",
         type=str,
-        help="file with merged bcsys output JSON files",
+        help="edit a specified task",
     )
 
     # Parse task/move
     task_move_subparser = task_subparser.add_parser("move", help="move task")
     task_move_subparser.add_argument(
-        "input",
+        "id",
         action="store",
-        metavar="INPUT_FILE",
+        metavar="TASK_ID",
         type=str,
-        help="file with merged bcsys output JSON files",
+        help="move task to new project",
+    )
+    task_move_subparser.add_argument(
+        "--dest",
+        action="store",
+        metavar="PROJECT_ID",
+        type=str,
+        help="destination project id",
     )
 
     # Parse task/tag
     task_tag_subparser = task_subparser.add_parser("tag", help="add tag to task")
     task_tag_subparser.add_argument(
-        "input",
+        "id",
         action="store",
-        metavar="INPUT_FILE",
+        metavar="TASK_ID",
         type=str,
-        help="file with merged bcsys output JSON files",
+        help="id of task to tag",
+    )
+    task_tag_subparser.add_argument(
+        "tag",
+        action="store",
+        metavar="TAG",
+        type=str,
+        help="tag to add to task",
     )
 
     # Parse task/done
     task_done_subparser = task_subparser.add_parser("delete", help="mark task as done")
     task_done_subparser.add_argument(
-        "input",
+        "id",
         action="store",
-        metavar="INPUT_FILE",
+        metavar="TASK_ID",
         type=str,
-        help="file with merged bcsys output JSON files",
+        help="id of task to mark as done",
     )
 
     # Parse arguments
