@@ -16,6 +16,7 @@ setup(
     url="https://github.com/popgendad/taoist",
     packages=["taoist"],
     install_requires=[
+        "tabulate>=0.8.9",
         "todoist_api_python>=1.1.0"
     ],
     python_requires=">=3.6",
