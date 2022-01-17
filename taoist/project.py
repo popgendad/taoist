@@ -31,3 +31,13 @@ def run_project(args: argparse.ArgumentParser) -> None:
             row = [project.id, project.name]
             project_list.append(row)
         print(tabulate(project_list, headers="firstrow"))
+    elif args.subcommand == "create":
+        try:
+            project = api.add_project(name=args.name)
+        except Exception as error:
+            print(error)
+    elif args.subcommand == "delete":
+        try:
+            is_success = api.delete_project(project_id=int(args.id))
+        except Exception as error:
+            print(error)        
