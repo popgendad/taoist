@@ -29,16 +29,13 @@ def parse_args() -> argparse.ArgumentParser:
         "project", help="project-related functions"
     )
 
+    # Add project subcommand parser
     project_subparser = project_parser.add_subparsers(dest="subcommand", help="subcommands")
 
+    # Parse project/list
     project_list_subparser = project_subparser.add_parser("list", help="list projects")
-    project_list_subparser.add_argument(
-        "id",
-        action="store",
-        metavar="INPUT_FILE",
-        type=str,
-        help="file with merged bcsys output JSON files",
-    )
+ 
+    # Parse project/create
     project_create_subparser = project_subparser.add_parser("create", help="create project")
     project_create_subparser.add_argument(
         "input",
@@ -47,6 +44,8 @@ def parse_args() -> argparse.ArgumentParser:
         type=str,
         help="file with merged bcsys output JSON files",
     )
+
+    # Parse project/delete
     project_delete_subparser = project_subparser.add_parser("delete", help="delete project")
     project_delete_subparser.add_argument(
         "input",
@@ -60,7 +59,11 @@ def parse_args() -> argparse.ArgumentParser:
     task_parser = subparsers.add_parser(
         "task", help="task-related functions"
     )
+
+    # Add task subcommand parser
     task_subparser = task_parser.add_subparsers(dest="subcommand", help="subcommands")
+
+    # Parse task/list
     task_list_subparser = task_subparser.add_parser("list", help="list tasks")
     task_list_subparser.add_argument(
         "input",
@@ -69,6 +72,8 @@ def parse_args() -> argparse.ArgumentParser:
         type=str,
         help="file with merged bcsys output JSON files",
     )
+
+    # Parse task/create
     task_create_subparser = task_subparser.add_parser("create", help="create task")
     task_create_subparser.add_argument(
         "input",
@@ -77,6 +82,8 @@ def parse_args() -> argparse.ArgumentParser:
         type=str,
         help="file with merged bcsys output JSON files",
     )
+
+    # Parse task/delete
     task_delete_subparser = task_subparser.add_parser("delete", help="delete task")
     task_delete_subparser.add_argument(
         "input",
@@ -85,6 +92,8 @@ def parse_args() -> argparse.ArgumentParser:
         type=str,
         help="file with merged bcsys output JSON files",
     )
+
+    # Parse task/edit
     task_edit_subparser = task_subparser.add_parser("edit", help="edit task")
     task_edit_subparser.add_argument(
         "input",
@@ -93,6 +102,8 @@ def parse_args() -> argparse.ArgumentParser:
         type=str,
         help="file with merged bcsys output JSON files",
     )
+
+    # Parse task/move
     task_move_subparser = task_subparser.add_parser("move", help="move task")
     task_move_subparser.add_argument(
         "input",
@@ -101,6 +112,8 @@ def parse_args() -> argparse.ArgumentParser:
         type=str,
         help="file with merged bcsys output JSON files",
     )
+
+    # Parse task/tag
     task_tag_subparser = task_subparser.add_parser("tag", help="add tag to task")
     task_tag_subparser.add_argument(
         "input",
@@ -109,6 +122,8 @@ def parse_args() -> argparse.ArgumentParser:
         type=str,
         help="file with merged bcsys output JSON files",
     )
+
+    # Parse task/done
     task_done_subparser = task_subparser.add_parser("delete", help="mark task as done")
     task_done_subparser.add_argument(
         "input",
