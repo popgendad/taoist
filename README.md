@@ -29,4 +29,4 @@ The `taoist` utility can perform the following task-related transactions:
 ## Getting started
 
 To connect `taoist` to your Todoist account, you must retrieve the API token. Once you have the API token, you
-run `taoist init`.
+run `taoist init --token <TOKEN>`.
