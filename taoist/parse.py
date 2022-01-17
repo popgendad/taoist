@@ -147,7 +147,7 @@ def parse_args() -> argparse.ArgumentParser:
     )
 
     # Parse task/done
-    task_done_subparser = task_subparser.add_parser("delete", help="mark task as done")
+    task_done_subparser = task_subparser.add_parser("done", help="mark task as done")
     task_done_subparser.add_argument(
         "id",
         action="store",
