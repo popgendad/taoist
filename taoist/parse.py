@@ -21,7 +21,7 @@ def parse_args() -> argparse.ArgumentParser:
         action="store",
         metavar="TOKEN",
         type=str,
-        help="Todoist API token",
+        help="Todoist user account API token",
     )
 
     # Define parser for project function
@@ -38,7 +38,7 @@ def parse_args() -> argparse.ArgumentParser:
     # Parse project/create
     project_create_subparser = project_subparser.add_parser("create", help="create project")
     project_create_subparser.add_argument(
-        "name",
+        "project_name",
         action="store",
         metavar="NAME",
         type=str,
@@ -48,10 +48,10 @@ def parse_args() -> argparse.ArgumentParser:
     # Parse project/delete
     project_delete_subparser = project_subparser.add_parser("delete", help="delete project")
     project_delete_subparser.add_argument(
-        "id",
+        "project_id",
         action="store",
         metavar="PROJECT_ID",
-        type=str,
+        type=int,
         help="id of project to delete",
     )
 
@@ -74,69 +74,69 @@ def parse_args() -> argparse.ArgumentParser:
     # Parse task/view
     task_view_subparser = task_subparser.add_parser("view", help="view task details")
     task_view_subparser.add_argument(
-        "id",
+        "task_id",
         action="store",
         metavar="TASK_ID",
-        type=str,
+        type=int,
         help="view task details",
     )
 
     # Parse task/create
     task_create_subparser = task_subparser.add_parser("create", help="create task")
     task_create_subparser.add_argument(
-        "project",
+        "project_name",
         action="store",
-        metavar="PROJECT",
+        metavar="PROJECT_NAME",
         type=str,
         default="Inbox",
-        help="create task in given project [default: Inbox]",
+        help="create new task in given project [default: Inbox]",
     )
 
     # Parse task/delete
     task_delete_subparser = task_subparser.add_parser("delete", help="delete task")
     task_delete_subparser.add_argument(
-        "id",
+        "task_id",
         action="store",
         metavar="TASK_ID",
-        type=str,
+        type=int,
         help="delete task",
     )
 
     # Parse task/edit
     task_edit_subparser = task_subparser.add_parser("edit", help="edit task")
     task_edit_subparser.add_argument(
-        "id",
+        "task_id",
         action="store",
         metavar="TASK_ID",
-        type=str,
+        type=int,
         help="edit a specified task",
     )
 
     # Parse task/move
     task_move_subparser = task_subparser.add_parser("move", help="move task")
     task_move_subparser.add_argument(
-        "id",
+        "task_id",
         action="store",
         metavar="TASK_ID",
-        type=str,
+        type=int,
         help="move task to new project",
     )
     task_move_subparser.add_argument(
         "--dest",
         action="store",
         metavar="PROJECT_ID",
-        type=str,
+        type=int,
         help="destination project id",
     )
 
     # Parse task/tag
     task_tag_subparser = task_subparser.add_parser("tag", help="add tag to task")
     task_tag_subparser.add_argument(
-        "id",
+        "task_id",
         action="store",
         metavar="TASK_ID",
-        type=str,
-        help="id of task to tag",
+        type=int,
+        help="id of existing task to tag",
     )
     task_tag_subparser.add_argument(
         "tag",
@@ -149,10 +149,10 @@ def parse_args() -> argparse.ArgumentParser:
     # Parse task/done
     task_done_subparser = task_subparser.add_parser("done", help="mark task as done")
     task_done_subparser.add_argument(
-        "id",
+        "task_id",
         action="store",
         metavar="TASK_ID",
-        type=str,
+        type=int,
         help="id of task to mark as done",
     )
 
