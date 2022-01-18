@@ -19,7 +19,11 @@ pip install taoist
 ## Getting started
 
 To connect `taoist` to your Todoist account, you must retrieve the API token. Once you have the API token, you
-run `taoist init --token <TOKEN>`.
+run
+
+```
+taoist init --token <TOKEN>
+```
 
 ## Projects
 
