@@ -138,6 +138,13 @@ def parse_args() -> argparse.ArgumentParser:
         type=int,
         help="id of existing task to add label",
     )
+    task_label_subparser.add_argument(
+        "label_id",
+        action="store",
+        metavar="LABEL_ID",
+        type=int,
+        help="id of label to add to task",
+    )
 
     # Parse task/done
     task_done_subparser = task_subparser.add_parser("done", help="mark task as done")
