@@ -1,5 +1,6 @@
 """task.py"""
 import argparse
+import json
 from taoist.read_config import read_config
 from tabulate import tabulate
 from todoist_api_python.api import TodoistAPI
@@ -40,5 +41,11 @@ def run_task(args: argparse.ArgumentParser) -> None:
             is_success = api.close_task(task_id=args.task_id)
             if is_success:
                 print(f"Task {args.task_id} marked as done")
+        except Exception as error:
+            print(error)
+    elif args.subcommand == "view":
+        try:
+            task = api.get_task(task_id=args.task_id)
+            print(json.dumps(task.to_dict(), indent=2))
         except Exception as error:
             print(error)
