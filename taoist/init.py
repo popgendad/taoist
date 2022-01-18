@@ -25,3 +25,4 @@ def run_init(args: argparse.ArgumentParser) -> None:
         config['Default'] = {'token': args.token}
     with open(config_file, 'w') as config_stream:
         config.write(config_stream)
+    os.chmod(config_file, 0o600)
