@@ -1,10 +1,7 @@
 """project.py"""
-import sys
-import os
 import argparse
+from taoist.read_config import read_config
 from tabulate import tabulate
-from pathlib import Path
-from configparser import ConfigParser
 from todoist_api_python.api import TodoistAPI
 
 def run_project(args: argparse.ArgumentParser) -> None:
@@ -12,17 +9,16 @@ def run_project(args: argparse.ArgumentParser) -> None:
     Run project function
     """
 
-    home_dir = Path.home()
-    config_file = os.path.join(home_dir, ".taoist/config.ini")
-    config = ConfigParser()
-    if os.path.isfile(config_file):
-        config.read(config_file)
-    else:
-        print("Error: Cannot read API token, please run init function")
-        sys.exit(1)
+    # Read taoist user configuration
+    config = read_config()
+
+    # Initialize Todoist API
     api = TodoistAPI(config['Default']['token'])
+
+    # Process subcommand
     if args.subcommand == "list":
-        project_list = [["id", "name"],]
+        table_header = ["id", "name"]
+        project_list = [table_header,]
         try:
             projects = api.get_projects()
         except Exception as error:
@@ -30,14 +26,16 @@ def run_project(args: argparse.ArgumentParser) -> None:
         for project in projects:
             row = [project.id, project.name]
             project_list.append(row)
+        
+        # Print project list table
         print(tabulate(project_list, headers="firstrow"))
     elif args.subcommand == "create":
         try:
-            project = api.add_project(name=args.name)
+            project = api.add_project(name=args.project_name)
         except Exception as error:
             print(error)
     elif args.subcommand == "delete":
         try:
-            is_success = api.delete_project(project_id=int(args.id))
+            is_success = api.delete_project(project_id=args.project_id)
         except Exception as error:
             print(error)        

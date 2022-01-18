@@ -1,23 +1,24 @@
 """task.py"""
-import sys
-import os
 import argparse
-from pathlib import Path
+from taoist.read_config import read_config
 from tabulate import tabulate
-from configparser import ConfigParser
 from todoist_api_python.api import TodoistAPI
 
 def run_task(args: argparse.ArgumentParser) -> None:
-    home_dir = Path.home()
-    config_file = os.path.join(home_dir, ".taoist/config.ini")
-    config = ConfigParser()
-    if os.path.isfile(config_file):
-        config.read(config_file)
-    else:
-        print("Error: Cannot read API token, please run init function")
-        sys.exit(1)
+    """
+    Run the task command
+    """
+
+    # Read taoist user configuration
+    config = read_config()
+
+    # Initialize Todoist API
     api = TodoistAPI(config['Default']['token'])
+
+    # Get tasks
     tasks = api.get_tasks()
+
+    # Process subcommand
     if args.subcommand == "list":
         task_list = [["id", "content", "status", "due"],]
         for task in tasks:
@@ -29,15 +30,15 @@ def run_task(args: argparse.ArgumentParser) -> None:
         print(tabulate(task_list, headers="firstrow"))
     elif args.subcommand == "delete":
         try:
-            is_success = api.delete_task(task_id=args.id)
+            is_success = api.delete_task(task_id=args.task_id)
             if is_success:
-                print(f"Task {args.id} deleted")
+                print(f"Task {args.task_id} deleted")
         except Exception as error:
             print(error)
     elif args.subcommand == "done":
         try:
-            is_success = api.close_task(task_id=args.id)
+            is_success = api.close_task(task_id=args.task_id)
             if is_success:
-                print(f"Task {args.id} marked as done")
+                print(f"Task {args.task_id} marked as done")
         except Exception as error:
             print(error)
