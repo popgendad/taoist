@@ -1,8 +1,8 @@
-"""main.py"""
-from taoist.parse import parse_args
-from taoist.task import run_task
-from taoist.project import run_project
-from taoist.init import run_init
+"""taoist_main.py"""
+from taoist.parse_args import parse_args
+from taoist.run_task import run_task
+from taoist.run_project import run_project
+from taoist.run_init import run_init
 
 def main():
     """

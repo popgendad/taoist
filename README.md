@@ -47,5 +47,5 @@ The `taoist` utility can perform the following task-related transactions:
 3. `delete`: delete an existing user task
 4. `edit`: edit properties of an existing user task
 5. `move`: move an existing user task from one project to another
-6. `tag`: add a tag to an existing user project
+6. `label`: add a label to an existing user task
 7. `done`: mark an existing user task as completed or done

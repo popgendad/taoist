@@ -1,4 +1,4 @@
-"""parse.py"""
+"""parse_args.py"""
 import sys
 import argparse
 from taoist import __version__
@@ -129,21 +129,14 @@ def parse_args() -> argparse.ArgumentParser:
         help="destination project id",
     )
 
-    # Parse task/tag
-    task_tag_subparser = task_subparser.add_parser("tag", help="add tag to task")
-    task_tag_subparser.add_argument(
+    # Parse task/label
+    task_label_subparser = task_subparser.add_parser("label", help="add label to task")
+    task_label_subparser.add_argument(
         "task_id",
         action="store",
         metavar="TASK_ID",
         type=int,
-        help="id of existing task to tag",
-    )
-    task_tag_subparser.add_argument(
-        "tag",
-        action="store",
-        metavar="TAG",
-        type=str,
-        help="tag to add to task",
+        help="id of existing task to add label",
     )
 
     # Parse task/done

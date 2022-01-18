@@ -1,7 +1,8 @@
-"""task.py"""
+"""run_task.py"""
 import json
 from argparse import ArgumentParser
 from taoist.read_project_dict import read_project_dict
+from taoist.read_label_dict import read_label_dict
 from tabulate import tabulate
 from todoist_api_python.api import TodoistAPI
 
@@ -13,20 +14,29 @@ def run_task(args: ArgumentParser) -> None:
     # Read config and project list
     config, project_dict = read_project_dict()
 
+    label_dict = read_label_dict(config)
+
     # Initialize Todoist API
     api = TodoistAPI(config['Default']['token'])
 
     # Get tasks
-    tasks = api.get_tasks()
+    try:
+        tasks = api.get_tasks()
+    except Exception as error:
+        print(error)
 
     # Process subcommand
     if args.subcommand == "list":
-        task_list = [["id", "content", "project", "status", "due"],]
+        task_list = [["id", "content", "project", "status", "due", "labels"],]
         for task in tasks:
             status = "Open"
             if task.completed:
                 status = "Done"
-            row = [task.id, task.content, project_dict[task.project_id].name, status, task.due.date]
+            label_list = []
+            for lab in task.label_ids:
+                label_list.append(label_dict[lab].name)
+            label_string = ','.join(label_list)
+            row = [task.id, task.content, project_dict[task.project_id].name, status, task.due.date, label_string]
             task_list.append(row)
         print(tabulate(task_list, headers="firstrow"))
     elif args.subcommand == "delete":

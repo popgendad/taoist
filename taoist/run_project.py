@@ -1,4 +1,4 @@
-"""project.py"""
+"""run_project.py"""
 from argparse import ArgumentParser
 from taoist.read_project_dict import read_project_dict
 from tabulate import tabulate
