@@ -21,6 +21,9 @@ def run_task(args: argparse.ArgumentParser) -> None:
     if args.subcommand == "list":
         task_list = [["id", "content", "status", "due"],]
         for task in tasks:
-            row = [task.id, task.content, task.completed, task.due.string]
+            status = "Open"
+            if task.completed:
+                status = "Done"
+            row = [task.id, task.content, status, task.due.date]
             task_list.append(row)
         print(tabulate(task_list, headers="firstrow"))
