@@ -1,4 +1,4 @@
-"""init.py"""
+"""run_init.py"""
 import os
 import argparse
 from pathlib import Path
