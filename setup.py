@@ -21,5 +21,5 @@ setup(
     ],
     python_requires=">=3.6",
     zip_safe=False,
-    entry_points={"console_scripts": ["taoist=taoist.main:main"]},
+    entry_points={"console_scripts": ["taoist=taoist.taoist_main:main"]},
 )

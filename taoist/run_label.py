@@ -1,36 +1,39 @@
-"""run_project.py"""
+"""run_label.py"""
 from argparse import ArgumentParser
 from taoist.read_project_dict import read_project_dict
+from taoist.read_label_dict import read_label_dict
 from tabulate import tabulate
 from todoist_api_python.api import TodoistAPI
 
-def run_project(args: ArgumentParser) -> None:
+def run_label(args: ArgumentParser) -> None:
     """
-    Run project command
+    Run the label command
     """
 
     # Read config and project list
     config, project_dict = read_project_dict()
 
-    # Process subcommand
+    # Read label list into dictionary
+    label_dict = read_label_dict(config)
+
     if args.subcommand == "list":
         table_header = ["id", "name"]
-        project_list = []
-        for key, project in project_dict.items():
-            row = [key, project.name]
-            project_list.append(row)
-        print(tabulate(project_list, headers=table_header))
+        label_list = []
+        for key, label in label_dict.items():
+            row = [key, label.name]
+            label_list.append(row)
+        print(tabulate(label_list, headers=table_header))
     elif args.subcommand == "create":
         api = TodoistAPI(config['Default']['token'])
         try:
-            project = api.add_project(name=args.project_name)
+            label = api.add_label(name=args.label_name)
         except Exception as error:
             print(error)
     elif args.subcommand == "delete":
         api = TodoistAPI(config['Default']['token'])
         try:
-            is_success = api.delete_project(project_id=args.project_id)
+            is_success = api.delete_label(label_id=args.label_id)
             if is_success:
-                print(f"Deleted project {project_dict[args.project_id].name}")
+                print(f"Deleted project {label_dict[args.label_id].name}")
         except Exception as error:
-            print(error)        
+            print(error)   

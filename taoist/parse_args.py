@@ -14,7 +14,7 @@ def parse_args() -> argparse.ArgumentParser:
     parser.add_argument("--version", action="version", version=__version__)
     subparsers = parser.add_subparsers(dest="command", help="Commands")
 
-    # Define parser for init function
+    # Define parser for init command
     init_parser = subparsers.add_parser("init", help="authenticate to Todoist API")
     init_parser.add_argument(
         "--token",
@@ -24,7 +24,7 @@ def parse_args() -> argparse.ArgumentParser:
         help="Todoist user account API token",
     )
 
-    # Define parser for project function
+    # Define parser for project command
     project_parser = subparsers.add_parser(
         "project", help="project-related functions"
     )
@@ -55,7 +55,7 @@ def parse_args() -> argparse.ArgumentParser:
         help="id of project to delete",
     )
 
-    # Define parser for task function
+    # Define parser for task command
     task_parser = subparsers.add_parser(
         "task", help="task-related functions"
     )
@@ -82,7 +82,7 @@ def parse_args() -> argparse.ArgumentParser:
     )
 
     # Parse task/create
-    task_create_subparser = task_subparser.add_parser("create", help="create task")
+    task_create_subparser = task_subparser.add_parser("create", help="create new task")
     task_create_subparser.add_argument(
         "project_name",
         action="store",
@@ -93,7 +93,7 @@ def parse_args() -> argparse.ArgumentParser:
     )
 
     # Parse task/delete
-    task_delete_subparser = task_subparser.add_parser("delete", help="delete task")
+    task_delete_subparser = task_subparser.add_parser("delete", help="delete existing task")
     task_delete_subparser.add_argument(
         "task_id",
         action="store",
@@ -130,7 +130,7 @@ def parse_args() -> argparse.ArgumentParser:
     )
 
     # Parse task/label
-    task_label_subparser = task_subparser.add_parser("label", help="add label to task")
+    task_label_subparser = task_subparser.add_parser("label", help="add label to existing task")
     task_label_subparser.add_argument(
         "task_id",
         action="store",
@@ -147,6 +147,37 @@ def parse_args() -> argparse.ArgumentParser:
         metavar="TASK_ID",
         type=int,
         help="id of task to mark as done",
+    )
+
+    # Define parser for label command
+    label_parser = subparsers.add_parser(
+        "label", help="label-related functions"
+    )
+
+    # Add label subcommand parser
+    label_subparser = label_parser.add_subparsers(dest="subcommand", help="subcommands")
+
+    # Parse label/list
+    label_list_subparser = label_subparser.add_parser("list", help="list labels")
+
+    # Parse label/create
+    label_create_subparser = label_subparser.add_parser("create", help="create new label")
+    label_create_subparser.add_argument(
+        "label_name",
+        action="store",
+        metavar="LABEL_ID",
+        type=str,
+        help="name of new label to create",
+    )
+
+    # Parse label/delete
+    label_delete_subparser = label_subparser.add_parser("delete", help="delete existing label")
+    label_delete_subparser.add_argument(
+        "label_id",
+        action="store",
+        metavar="LABEL_ID",
+        type=int,
+        help="id of existing label to delete",
     )
 
     # Parse arguments

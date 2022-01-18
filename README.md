@@ -31,7 +31,7 @@ taoist task list
 Working with Projects
 ---------------------
 
-The `taoist` utility currently has the functionality to perform the following project related transactions:
+The `taoist` utility currently has the functionality to perform the following project-related requests:
 
 1. `list`: list user's projects
 2. `create`: create a new user project
@@ -40,7 +40,7 @@ The `taoist` utility currently has the functionality to perform the following pr
 Working with Tasks
 ------------------
 
-The `taoist` utility can perform the following task-related transactions:
+The `taoist` utility can perform the following task-related requests:
 
 1. `list`: list user's tasks
 2. `create`: create a new user task
@@ -49,3 +49,12 @@ The `taoist` utility can perform the following task-related transactions:
 5. `move`: move an existing user task from one project to another
 6. `label`: add a label to an existing user task
 7. `done`: mark an existing user task as completed or done
+
+Working with Labels
+-------------------
+
+The `taoist` utility currently has the functionality to perform the following label-related requests:
+
+1. `list`: list user's labels
+2. `create`: create a new user label
+3. `delete`: delete an existing user label
