@@ -8,6 +8,14 @@ This project is still under development and is not yet ready for release. It is 
 
 The `taoist` utility has functionality for performing simple transactions involving both Todoist projects and tasks.
 
+## Installation
+
+The taoist package can be install via PyPi
+
+```
+pip install taoist
+```
+
 ## Projects
 
 The `taoist` utility currently has the functionality to perform the following project related transactions:
