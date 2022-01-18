@@ -27,3 +27,17 @@ def run_task(args: argparse.ArgumentParser) -> None:
             row = [task.id, task.content, status, task.due.date]
             task_list.append(row)
         print(tabulate(task_list, headers="firstrow"))
+    elif args.subcommand == "delete":
+        try:
+            is_success = api.delete_task(task_id=args.id)
+            if is_success:
+                print(f"Task {args.id} deleted")
+        except Exception as error:
+            print(error)
+    elif args.subcommand == "done":
+        try:
+            is_success = api.close_task(task_id=args.id)
+            if is_success:
+                print(f"Task {args.id} marked as done")
+        except Exception as error:
+            print(error)
