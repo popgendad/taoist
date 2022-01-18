@@ -18,6 +18,10 @@ def run_init(args: argparse.ArgumentParser) -> None:
             config.read(config_file)
     else:
         os.mkdir(taoist_dir)
-    config['Default'] = {'token': args.token}
+    if not args.token:
+        token = input('Enter Your Todoist API Token: ')
+        config['Default'] = {'token': token}
+    else:
+        config['Default'] = {'token': args.token}
     with open(config_file, 'w') as config_stream:
         config.write(config_stream)
