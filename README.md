@@ -4,7 +4,7 @@ Python-based command line interface for Todoist
 
 [![Upload Python Package](https://github.com/popgendad/taoist/actions/workflows/python-publish.yml/badge.svg)](https://github.com/popgendad/taoist/actions/workflows/python-publish.yml)
 
-This project is still under development and is not yet ready for release. It is a relatively simple utility that relies on the [official Todoist API](https://github.com/Doist/todoist-python).
+This project is still under development and is not yet ready for release. It is a relatively simple utility that relies on the [official Todoist Python API](https://github.com/Doist/todoist-api-python).
 
 The `taoist` utility has functionality for performing simple transactions involving both Todoist projects and tasks.
 
