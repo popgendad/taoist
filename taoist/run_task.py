@@ -27,7 +27,8 @@ def run_task(args: ArgumentParser) -> None:
 
     # Process subcommand
     if args.subcommand == "list":
-        task_list = [["id", "content", "project", "status", "due", "labels"],]
+        header_list = ["id", "content", "project", "status", "due", "labels"]
+        task_list = []
         for task in tasks:
             status = "Open"
             if task.completed:
@@ -38,7 +39,8 @@ def run_task(args: ArgumentParser) -> None:
             label_string = ','.join(label_list)
             row = [task.id, task.content, project_dict[task.project_id].name, status, task.due.date, label_string]
             task_list.append(row)
-        print(tabulate(task_list, headers="firstrow"))
+        task_list.sort(key=lambda x: x[4])
+        print(tabulate(task_list, headers=header_list))
     elif args.subcommand == "delete":
         try:
             is_success = api.delete_task(task_id=args.task_id)
