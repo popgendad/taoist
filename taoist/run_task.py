@@ -61,3 +61,11 @@ def run_task(args: ArgumentParser) -> None:
             print(json.dumps(task.to_dict(), indent=2))
         except Exception as error:
             print(error)
+    elif args.subcommand == "label":
+        try:
+            new_list = [args.label_id]
+            is_success = api.update_task(task_id=args.task_id, label_ids=new_list)
+            if is_success:
+                print("Label successfully added to task")
+        except Exception as error:
+            print(error)
