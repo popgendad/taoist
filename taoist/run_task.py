@@ -36,7 +36,11 @@ def run_task(args: ArgumentParser) -> None:
             for lab in task.label_ids:
                 label_list.append(label_dict[lab].name)
             label_string = ','.join(label_list)
-            row = [task.id, task.content, project_dict[task.project_id].name, status, task.due.date, label_string]
+            if task.due:
+                due_date = task.due.date
+            else:
+                due_date = ""
+            row = [task.id, task.content, project_dict[task.project_id].name, status, due_date, label_string]
             task_list.append(row)
         task_list.sort(key=lambda x: x[4])
         print(tabulate(task_list, headers=table_header))
