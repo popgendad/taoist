@@ -46,9 +46,8 @@ The `taoist` utility can perform the following task-related requests:
 2. `create`: create a new user task
 3. `delete`: delete an existing user task
 4. `edit`: edit properties of an existing user task
-5. `move`: move an existing user task from one project to another
-6. `label`: add a label to an existing user task
-7. `done`: mark an existing user task as completed or done
+5. `label`: add a label to an existing user task
+6. `done`: mark an existing user task as completed or done
 
 Working with Labels
 -------------------

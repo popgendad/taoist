@@ -19,14 +19,13 @@ def run_task(args: ArgumentParser) -> None:
     # Initialize Todoist API
     api = TodoistAPI(config['Default']['token'])
 
-    # Get tasks
-    try:
-        tasks = api.get_tasks()
-    except Exception as error:
-        print(error)
-
     # Process subcommand
     if args.subcommand == "list":
+        # Get all tasks
+        try:
+            tasks = api.get_tasks()
+        except Exception as error:
+            print(error)
         table_header = ["id", "content", "project", "status", "due", "labels"]
         task_list = []
         for task in tasks:
@@ -63,9 +62,23 @@ def run_task(args: ArgumentParser) -> None:
             print(error)
     elif args.subcommand == "label":
         try:
-            new_list = [args.label_id]
+            task = api.get_task(task_id=args.task_id)
+            new_list = task.label_ids
+            new_list.append(args.label_id)
             is_success = api.update_task(task_id=args.task_id, label_ids=new_list)
             if is_success:
                 print("Label successfully added to task")
+        except Exception as error:
+            print(error)
+    elif args.subcommand == "create":
+        try:
+            task = api.add_task(
+                content=args.content,
+                due_string=args.due,
+                project_id=args.project,
+                due_lang='en',
+                priority=4,
+            )
+            print(task)
         except Exception as error:
             print(error)

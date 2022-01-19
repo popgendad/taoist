@@ -84,12 +84,29 @@ def parse_args() -> argparse.ArgumentParser:
     # Parse task/create
     task_create_subparser = task_subparser.add_parser("create", help="create new task")
     task_create_subparser.add_argument(
-        "project_name",
+        "content",
         action="store",
-        metavar="PROJECT_NAME",
+        metavar="TASK_NAME",
+        type=str,
+        help="task title",
+    )
+
+    task_create_subparser.add_argument(
+        "--due",
+        action="store",
+        metavar="DUE_STRING",
+        type=str,
+        default="Tomorrow",
+        help="human language describing due date [default: Tomorrow]",
+    )
+
+    task_create_subparser.add_argument(
+        "--project",
+        action="store",
+        metavar="PROJECT_ID",
         type=str,
         default="Inbox",
-        help="create new task in given project [default: Inbox]",
+        help="id of project in which to create new task [default: Inbox]",
     )
 
     # Parse task/delete
@@ -110,23 +127,6 @@ def parse_args() -> argparse.ArgumentParser:
         metavar="TASK_ID",
         type=int,
         help="edit a specified task",
-    )
-
-    # Parse task/move
-    task_move_subparser = task_subparser.add_parser("move", help="move task")
-    task_move_subparser.add_argument(
-        "task_id",
-        action="store",
-        metavar="TASK_ID",
-        type=int,
-        help="move task to new project",
-    )
-    task_move_subparser.add_argument(
-        "--dest",
-        action="store",
-        metavar="PROJECT_ID",
-        type=int,
-        help="destination project id",
     )
 
     # Parse task/label
