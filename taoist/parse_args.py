@@ -119,16 +119,6 @@ def parse_args() -> argparse.ArgumentParser:
         help="delete task",
     )
 
-    # Parse task/edit
-    task_edit_subparser = task_subparser.add_parser("edit", help="edit task")
-    task_edit_subparser.add_argument(
-        "task_id",
-        action="store",
-        metavar="TASK_ID",
-        type=int,
-        help="edit a specified task",
-    )
-
     # Parse task/label
     task_label_subparser = task_subparser.add_parser("label", help="add label to existing task")
     task_label_subparser.add_argument(
