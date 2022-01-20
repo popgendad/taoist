@@ -59,9 +59,25 @@ def run_task(args: ArgumentParser) -> None:
         except Exception as error:
             print(error)
     elif args.subcommand == "view":
+        view_list = []
         try:
             task = api.get_task(task_id=args.task_id)
-            print(json.dumps(task.to_dict(), indent=2))
+            task_dict = task.to_dict()
+            view_list.append(["Name", task_dict['content']])
+            project_id = task_dict['project_id']
+            project_name = project_dict[project_id].name
+            view_list.append(["Project", project_name])
+            due_dict = task_dict['due']
+            view_list.append(["Due", due_dict['date']])
+            view_list.append(["Recurring", due_dict['recurring']])
+            view_list.append(["Priority", task_dict['priority']])
+            label_list = []
+            for lab in task_dict['label_ids']:
+                label_list.append(label_dict[lab].name)
+            if len(label_list) > 0:
+                label_string = ','.join(label_list)
+                view_list.append(["Labels", label_string])
+            print(tabulate(view_list))
         except Exception as error:
             print(error)
     elif args.subcommand == "label":
