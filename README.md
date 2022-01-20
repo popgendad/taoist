@@ -56,3 +56,12 @@ The `taoist` utility currently has the functionality to perform the following la
 1. `list`: list user's labels
 2. `create`: create a new user label
 3. `delete`: delete an existing user label
+
+Working with Section
+-------------------
+
+The `taoist` utility currently has the functionality to perform the following section-related requests:
+
+1. `list`: list sections within a given project
+2. `create`: create a new section within a given project
+3. `delete`: delete an existing section
