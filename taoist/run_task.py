@@ -40,7 +40,14 @@ def run_task(args: ArgumentParser) -> None:
                 due_date = task.due.date
             else:
                 due_date = ""
-            row = [task.id, task.content, project_dict[task.project_id].name, status, due_date, label_string]
+            project_path = [project_dict[task.project_id].name]
+            project_parent_id = project_dict[task.project_id].parent_id
+            while project_parent_id:
+                project_parent = project_dict[project_parent_id]
+                project_path = [project_parent.name] + project_path
+                project_parent_id = project_parent.parent_id
+            project_path_string = '/'.join(project_path)
+            row = [task.id, task.content, project_path_string, status, due_date, label_string]
             task_list.append(row)
         task_list.sort(key=lambda x: x[4])
         print(tabulate(task_list, headers=table_header))
@@ -65,11 +72,18 @@ def run_task(args: ArgumentParser) -> None:
             task_dict = task.to_dict()
             view_list.append(["Name", task_dict['content']])
             project_id = task_dict['project_id']
-            project_name = project_dict[project_id].name
-            view_list.append(["Project", project_name])
+            project_path = [project_dict[project_id].name]
+            project_parent_id = project_dict[project_id].parent_id
+            while project_parent_id:
+                project_parent = project_dict[project_parent_id]
+                project_path = [project_parent.name] + project_path
+                project_parent_id = project_parent.parent_id
+            project_path_string = '/'.join(project_path)
+            view_list.append(["Project", project_path_string])
             due_dict = task_dict['due']
-            view_list.append(["Due", due_dict['date']])
-            view_list.append(["Recurring", due_dict['recurring']])
+            if due_dict:
+                view_list.append(["Due", due_dict['date']])
+                view_list.append(["Recurring", due_dict['recurring']])
             view_list.append(["Priority", task_dict['priority']])
             label_list = []
             for lab in task_dict['label_ids']:

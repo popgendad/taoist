@@ -17,7 +17,14 @@ def run_project(args: ArgumentParser) -> None:
         table_header = ["id", "name"]
         project_list = []
         for key, project in project_dict.items():
-            row = [key, project.name]
+            project_path = [project.name]
+            project_parent_id = project.parent_id
+            while project_parent_id:
+                project_parent = project_dict[project_parent_id]
+                project_path = [project_parent.name] + project_path
+                project_parent_id = project_parent.parent_id
+            project_path_string = '/'.join(project_path)
+            row = [key, project_path_string]
             project_list.append(row)
         print(tabulate(project_list, headers=table_header))
     elif args.subcommand == "create":
