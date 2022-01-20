@@ -111,7 +111,7 @@ def run_task(args: ArgumentParser) -> None:
                 due_string=args.due,
                 project_id=args.project,
                 due_lang='en',
-                priority=4,
+                priority=args.priority,
             )
             print(task)
         except Exception as error:

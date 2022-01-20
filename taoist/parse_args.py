@@ -97,7 +97,7 @@ def parse_args() -> argparse.ArgumentParser:
         metavar="DUE_STRING",
         type=str,
         default="Tomorrow",
-        help="human language describing due date [default: Tomorrow]",
+        help="human language describing due date [default: %(default)s]",
     )
 
     task_create_subparser.add_argument(
@@ -106,7 +106,17 @@ def parse_args() -> argparse.ArgumentParser:
         metavar="PROJECT_ID",
         type=str,
         default="Inbox",
-        help="id of project in which to create new task [default: Inbox]",
+        help="id of project in which to create new task [default: %(default)s]",
+    )
+
+    task_create_subparser.add_argument(
+        "--priority",
+        action="store",
+        metavar="INT",
+        type=int,
+        choices=[1, 2, 3, 4],
+        default=4,
+        help="priority level 1-4 [default: %(default)s]",
     )
 
     # Parse task/delete
