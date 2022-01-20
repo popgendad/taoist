@@ -1,4 +1,4 @@
-# taoist: Python-based command line interface for Todoist
+# taoist: Python-based Terminal Utility for Todoist
 
 [![Upload Python Package](https://github.com/popgendad/taoist/actions/workflows/python-publish.yml/badge.svg)](https://github.com/popgendad/taoist/actions/workflows/python-publish.yml)
 
