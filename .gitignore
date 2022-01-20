@@ -2,4 +2,5 @@ build/
 dist/
 taoist.egg-info
 taoist/__pycache__/
+taoist/__init__.pyc
 .vscode/
