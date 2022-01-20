@@ -36,7 +36,7 @@ def parse_args() -> argparse.ArgumentParser:
     project_list_subparser = project_subparser.add_parser("list", help="list projects")
  
     # Parse project/create
-    project_create_subparser = project_subparser.add_parser("create", help="create project")
+    project_create_subparser = project_subparser.add_parser("create", help="create new project")
     project_create_subparser.add_argument(
         "project_name",
         action="store",
@@ -46,7 +46,7 @@ def parse_args() -> argparse.ArgumentParser:
     )
 
     # Parse project/delete
-    project_delete_subparser = project_subparser.add_parser("delete", help="delete project")
+    project_delete_subparser = project_subparser.add_parser("delete", help="delete existing project")
     project_delete_subparser.add_argument(
         "project_id",
         action="store",
@@ -64,7 +64,7 @@ def parse_args() -> argparse.ArgumentParser:
     task_subparser = task_parser.add_subparsers(dest="subcommand", help="subcommands")
 
     # Parse task/list
-    task_list_subparser = task_subparser.add_parser("list", help="list tasks")
+    task_list_subparser = task_subparser.add_parser("list", help="list active tasks")
     task_list_subparser.add_argument(
         "--sort",
         action="store_true",
@@ -147,7 +147,7 @@ def parse_args() -> argparse.ArgumentParser:
     )
 
     # Parse task/done
-    task_done_subparser = task_subparser.add_parser("done", help="mark task as done")
+    task_done_subparser = task_subparser.add_parser("done", help="mark active task as done")
     task_done_subparser.add_argument(
         "task_id",
         action="store",
@@ -165,7 +165,7 @@ def parse_args() -> argparse.ArgumentParser:
     label_subparser = label_parser.add_subparsers(dest="subcommand", help="subcommands")
 
     # Parse label/list
-    label_list_subparser = label_subparser.add_parser("list", help="list labels")
+    label_list_subparser = label_subparser.add_parser("list", help="list existing labels")
 
     # Parse label/create
     label_create_subparser = label_subparser.add_parser("create", help="create new label")
@@ -185,6 +185,52 @@ def parse_args() -> argparse.ArgumentParser:
         metavar="LABEL_ID",
         type=int,
         help="id of existing label to delete",
+    )
+
+    # Define parser for project command
+    section_parser = subparsers.add_parser(
+        "section", help="section-related functions"
+    )
+
+    # Add section subcommand parser
+    section_subparser = section_parser.add_subparsers(dest="subcommand", help="subcommands")
+
+    # Parse section/list
+    section_list_subparser = section_subparser.add_parser("list", help="list sections")
+    section_list_subparser.add_argument(
+        "project_id",
+        action="store",
+        metavar="PROJECT_ID",
+        type=int,
+        help="id of project to list sections",
+    )
+
+    # Parse section/create
+    section_create_subparser = section_subparser.add_parser("create", help="create new section")
+    section_create_subparser.add_argument(
+        "project_id",
+        action="store",
+        metavar="PROJECT_ID",
+        type=int,
+        help="id of project in which new section will be created",
+    )
+
+    section_create_subparser.add_argument(
+        "section_name",
+        action="store",
+        metavar="SECTION_NAME",
+        type=str,
+        help="name of the new section",
+    )
+
+    # Parse section/delete
+    section_delete_subparser = section_subparser.add_parser("delete", help="delete existing section")
+    section_delete_subparser.add_argument(
+        "section_id",
+        action="store",
+        metavar="SECTION_ID",
+        type=int,
+        help="id of existing section to delete",
     )
 
     # Parse arguments

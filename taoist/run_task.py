@@ -1,9 +1,8 @@
 """run_task.py"""
-import json
 from argparse import ArgumentParser
+from tabulate import tabulate
 from taoist.read_project_dict import read_project_dict
 from taoist.read_label_dict import read_label_dict
-from tabulate import tabulate
 from todoist_api_python.api import TodoistAPI
 
 def run_task(args: ArgumentParser) -> None:

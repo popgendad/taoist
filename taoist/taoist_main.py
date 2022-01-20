@@ -4,6 +4,7 @@ from taoist.run_task import run_task
 from taoist.run_project import run_project
 from taoist.run_init import run_init
 from taoist.run_label import run_label
+from taoist.run_section import run_section
 
 def main():
     """
@@ -22,6 +23,8 @@ def main():
         run_init(args)
     elif args.command == "label":
         run_label(args)
+    elif args.command == "section":
+        run_section(args)
     else:
         raise Exception(f"Command {args.command} not recognized")
 
