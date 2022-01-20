@@ -48,6 +48,7 @@ The `taoist` utility can perform the following task-related requests:
 3. `delete`: delete an existing user task
 4. `label`: add a label to an existing user task
 5. `done`: mark an existing user task as completed or done
+6. `view`: view task details
 
 Working with Labels
 -------------------
