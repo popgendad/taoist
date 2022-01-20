@@ -3,26 +3,26 @@ from argparse import ArgumentParser
 from tabulate import tabulate
 from taoist.read_project_dict import read_project_dict
 from taoist.read_label_dict import read_label_dict
-from todoist_api_python.api import TodoistAPI
+from todoist_api_python.api_async import TodoistAPIAsync
 
-def run_task(args: ArgumentParser) -> None:
+async def run_task(args: ArgumentParser) -> None:
     """
     Run the task command
     """
 
     # Read config and project list
-    config, project_dict = read_project_dict()
+    config, project_dict = await read_project_dict()
 
-    label_dict = read_label_dict(config)
+    label_dict = await read_label_dict(config)
 
     # Initialize Todoist API
-    api = TodoistAPI(config['Default']['token'])
+    api = TodoistAPIAsync(config['Default']['token'])
 
     # Process subcommand
     if args.subcommand == "list":
         # Get all tasks
         try:
-            tasks = api.get_tasks()
+            tasks = await api.get_tasks()
         except Exception as error:
             print(error)
         table_header = ["id", "content", "project", "status", "due", "labels"]
@@ -52,14 +52,14 @@ def run_task(args: ArgumentParser) -> None:
         print(tabulate(task_list, headers=table_header))
     elif args.subcommand == "delete":
         try:
-            is_success = api.delete_task(task_id=args.task_id)
+            is_success = await api.delete_task(task_id=args.task_id)
             if is_success:
                 print(f"Task {args.task_id} deleted")
         except Exception as error:
             print(error)
     elif args.subcommand == "done":
         try:
-            is_success = api.close_task(task_id=args.task_id)
+            is_success = await api.close_task(task_id=args.task_id)
             if is_success:
                 print(f"Task {args.task_id} marked as done")
         except Exception as error:
@@ -67,7 +67,7 @@ def run_task(args: ArgumentParser) -> None:
     elif args.subcommand == "view":
         view_list = []
         try:
-            task = api.get_task(task_id=args.task_id)
+            task = await api.get_task(task_id=args.task_id)
             task_dict = task.to_dict()
             view_list.append(["Name", task_dict['content']])
             project_id = task_dict['project_id']
@@ -95,17 +95,17 @@ def run_task(args: ArgumentParser) -> None:
             print(error)
     elif args.subcommand == "label":
         try:
-            task = api.get_task(task_id=args.task_id)
+            task = await api.get_task(task_id=args.task_id)
             new_list = task.label_ids
             new_list.append(args.label_id)
-            is_success = api.update_task(task_id=args.task_id, label_ids=new_list)
+            is_success = await api.update_task(task_id=args.task_id, label_ids=new_list)
             if is_success:
                 print("Label successfully added to task")
         except Exception as error:
             print(error)
     elif args.subcommand == "create":
         try:
-            task = api.add_task(
+            task = await api.add_task(
                 content=args.content,
                 due_string=args.due,
                 project_id=args.project,

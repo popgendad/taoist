@@ -2,24 +2,23 @@
 from argparse import ArgumentParser
 from tabulate import tabulate
 from taoist.read_project_dict import read_project_dict
-from taoist.read_label_dict import read_label_dict
-from todoist_api_python.api import TodoistAPI
+from todoist_api_python.api_async import TodoistAPIAsync
 
-def run_section(args: ArgumentParser) -> None:
+async def run_section(args: ArgumentParser) -> None:
     """
     Run the section command
     """
 
     # Read config and project list
-    config, project_dict = read_project_dict()
+    config, project_dict = await read_project_dict()
 
     # Initialize Todoist API
-    api = TodoistAPI(config['Default']['token'])
+    api = TodoistAPIAsync(config['Default']['token'])
 
     # Process subcommand
     if args.subcommand == "list":
         try:
-            sections = api.get_sections(project_id=args.project_id)
+            sections = await api.get_sections(project_id=args.project_id)
         except Exception as error:
             print(error)
         project = project_dict[args.project_id]
@@ -38,13 +37,13 @@ def run_section(args: ArgumentParser) -> None:
         print(tabulate(section_list, headers=table_header))
     elif args.subcommand == "create":
         try:
-            section = api.add_section(name=args.section_name, project_id=args.project_id)
+            section = await api.add_section(name=args.section_name, project_id=args.project_id)
             print(f"Added section {args.section_name}")
         except Exception as error:
             print(error)
     elif args.subcommand == "delete":
         try:
-            is_success = api.delete_section(section_id=args.section_id)
+            is_success = await api.delete_section(section_id=args.section_id)
             if is_success:
                 print(f"Deleted section {args.section_id}")
         except Exception as error:

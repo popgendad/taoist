@@ -1,9 +1,9 @@
 """"read_project_dict.py"""
 from typing import Tuple
 from taoist.read_config import read_config
-from todoist_api_python.api import TodoistAPI
+from todoist_api_python.api_async import TodoistAPIAsync
 
-def read_project_dict() -> Tuple:
+async def read_project_dict() -> Tuple:
     """
     Read project list into dictionary
     """
@@ -12,14 +12,14 @@ def read_project_dict() -> Tuple:
     config = read_config()
 
     # Initialize Todoist API
-    api = TodoistAPI(config['Default']['token'])
+    api = TodoistAPIAsync(config['Default']['token'])
 
     # Initialize project dictionary
     project_dict = {}
 
     # Read projects into memory
     try:
-        projects = api.get_projects()
+        projects = await api.get_projects()
     except Exception as error:
         print(error)
     
