@@ -1,23 +1,23 @@
 """"read_label_dict.py"""
 from typing import Dict
 from configparser import ConfigParser
-from todoist_api_python.api import TodoistAPI
+from todoist_api_python.api_async import TodoistAPIAsync
 
-def read_label_dict(config: ConfigParser) -> Dict:
+async def read_label_dict(config: ConfigParser) -> Dict:
 
     """
     Read label list into dictionary
     """
 
     # Initialize Todoist API
-    api = TodoistAPI(config['Default']['token'])
+    api = TodoistAPIAsync(config['Default']['token'])
 
     # Initialize label dictionary
     label_dict = {}
 
    # Get labels
     try:
-        labels = api.get_labels()
+        labels = await api.get_labels()
     except Exception as error:
         print(error)
     
