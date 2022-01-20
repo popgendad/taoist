@@ -115,7 +115,7 @@ def parse_args() -> argparse.ArgumentParser:
         metavar="INT",
         type=int,
         choices=[1, 2, 3, 4],
-        default=4,
+        default=1,
         help="priority level 1-4 [default: %(default)s]",
     )
 
