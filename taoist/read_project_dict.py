@@ -21,7 +21,7 @@ async def read_project_dict() -> Tuple:
     try:
         projects = await api.get_projects()
     except Exception as error:
-        print(error)
+        raise error
     
     # Construct project dictionary
     for project in projects:
