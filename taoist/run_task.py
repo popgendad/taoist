@@ -22,7 +22,6 @@ async def run_task(args: ArgumentParser) -> None:
 
     # Process subcommand
     if args.subcommand == "list":
-        # Get all tasks
         try:
             tasks = await api.get_tasks()
         except Exception as error:
@@ -94,7 +93,7 @@ async def run_task(args: ArgumentParser) -> None:
         except Exception as error:
             raise error
         if is_success:
-            print("Label successfully added to task")
+            print("Successfully added label to task")
     elif args.subcommand == "create":
         try:
             task = await api.add_task(
@@ -104,6 +103,6 @@ async def run_task(args: ArgumentParser) -> None:
                 due_lang='en',
                 priority=args.priority,
             )
-            print(task)
         except Exception as error:
             raise error
+        print(f"Successfully created task \"{args.content}\"")
