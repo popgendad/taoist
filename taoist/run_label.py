@@ -16,6 +16,9 @@ async def run_label(args: ArgumentParser) -> None:
     # Read label list into dictionary
     label_dict = await read_label_dict(config)
 
+    # Initialize Todoist API
+    api = TodoistAPIAsync(config['Default']['token'])
+
     # Process subcommand
     if args.subcommand == "list":
         table_header = ["id", "name"]
@@ -25,16 +28,15 @@ async def run_label(args: ArgumentParser) -> None:
             label_list.append(row)
         print(tabulate(label_list, headers=table_header))
     elif args.subcommand == "create":
-        api = TodoistAPIAsync(config['Default']['token'])
         try:
             label = await api.add_label(name=args.label_name)
         except Exception as error:
             raise error
+        print(f"Created label \"{args.label_name}\"")
     elif args.subcommand == "delete":
-        api = TodoistAPIAsync(config['Default']['token'])
         try:
             is_success = await api.delete_label(label_id=args.label_id)
-            if is_success:
-                print(f"Deleted project {label_dict[args.label_id].name}")
         except Exception as error:
-            raise error 
+            raise error
+        if is_success:
+            print(f"Deleted project \"{label_dict[args.label_id].name}\"")

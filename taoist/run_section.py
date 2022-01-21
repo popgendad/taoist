@@ -32,13 +32,13 @@ async def run_section(args: ArgumentParser) -> None:
     elif args.subcommand == "create":
         try:
             section = await api.add_section(name=args.section_name, project_id=args.project_id)
-            print(f"Added section {args.section_name}")
         except Exception as error:
-            print(error)
+            raise error
+        print(f"Added section \"{args.section_name}\"")
     elif args.subcommand == "delete":
         try:
             is_success = await api.delete_section(section_id=args.section_id)
-            if is_success:
-                print(f"Deleted section {args.section_id}")
         except Exception as error:
-            raise error      
+            raise error
+        if is_success:
+            print(f"Deleted section {args.section_id}")  
