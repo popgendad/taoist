@@ -28,15 +28,17 @@ async def run_label(args: ArgumentParser) -> None:
             label_list.append(row)
         print(tabulate(label_list, headers=table_header))
     elif args.subcommand == "create":
+        label_name = args.label_name if args.label_name else input("Enter new label name: ")
         try:
-            label = await api.add_label(name=args.label_name)
+            label = await api.add_label(name=label_name)
         except Exception as error:
             raise error
-        print(f"Created label \"{args.label_name}\"")
+        print(f"Successfully created label \"{label_name}\"")
     elif args.subcommand == "delete":
+        label_id = args.label_id if args.label_id else int(input("Enter label ID: "))
         try:
-            is_success = await api.delete_label(label_id=args.label_id)
+            is_success = await api.delete_label(label_id=label_id)
         except Exception as error:
             raise error
         if is_success:
-            print(f"Deleted project \"{label_dict[args.label_id].name}\"")
+            print(f"Successfully deleted label \"{label_dict[label_id].name}\"")
