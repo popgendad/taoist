@@ -15,6 +15,7 @@ def main():
     # Parse arguments
     args = parse_args()
 
+    # Get the current event loop
     loop = asyncio.get_event_loop()
 
     # Fork execution stream

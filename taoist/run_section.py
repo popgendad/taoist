@@ -1,8 +1,9 @@
 """run_section.py"""
 from argparse import ArgumentParser
 from tabulate import tabulate
-from taoist.read_project_dict import read_project_dict
 from todoist_api_python.api_async import TodoistAPIAsync
+from taoist.read_project_dict import read_project_dict
+from taoist.parent_project import parent_project
 
 async def run_section(args: ArgumentParser) -> None:
     """
@@ -21,14 +22,7 @@ async def run_section(args: ArgumentParser) -> None:
             sections = await api.get_sections(project_id=args.project_id)
         except Exception as error:
             print(error)
-        project = project_dict[args.project_id]
-        project_path = [project.name]
-        project_parent_id = project.parent_id
-        while project_parent_id:
-            project_parent = project_dict[project_parent_id]
-            project_path = [project_parent.name] + project_path
-            project_parent_id = project_parent.parent_id
-        project_path_string = '/'.join(project_path)
+        project_path_string = parent_project(args.project_id, project_dict)
         table_header = ["id", "name", "project"]
         section_list = []
         for section in sections:

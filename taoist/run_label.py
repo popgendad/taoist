@@ -1,9 +1,9 @@
 """run_label.py"""
 from argparse import ArgumentParser
 from tabulate import tabulate
+from todoist_api_python.api_async import TodoistAPIAsync
 from taoist.read_project_dict import read_project_dict
 from taoist.read_label_dict import read_label_dict
-from todoist_api_python.api_async import TodoistAPIAsync
 
 async def run_label(args: ArgumentParser) -> None:
     """
@@ -16,6 +16,7 @@ async def run_label(args: ArgumentParser) -> None:
     # Read label list into dictionary
     label_dict = await read_label_dict(config)
 
+    # Process subcommand
     if args.subcommand == "list":
         table_header = ["id", "name"]
         label_list = []
