@@ -21,7 +21,7 @@ async def run_section(args: ArgumentParser) -> None:
         try:
             sections = await api.get_sections(project_id=args.project_id)
         except Exception as error:
-            print(error)
+            raise error
         project_path_string = parent_project(args.project_id, project_dict)
         table_header = ["id", "name", "project"]
         section_list = []
@@ -41,4 +41,4 @@ async def run_section(args: ArgumentParser) -> None:
             if is_success:
                 print(f"Deleted section {args.section_id}")
         except Exception as error:
-            print(error)       
+            raise error      

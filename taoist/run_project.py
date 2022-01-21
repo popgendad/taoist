@@ -27,7 +27,7 @@ async def run_project(args: ArgumentParser) -> None:
         try:
             project = await api.add_project(name=args.project_name)
         except Exception as error:
-            print(error)
+            raise error
     elif args.subcommand == "delete":
         api = TodoistAPIAsync(config['Default']['token'])
         try:
@@ -35,4 +35,4 @@ async def run_project(args: ArgumentParser) -> None:
             if is_success:
                 print(f"Deleted project {project_dict[args.project_id].name}")
         except Exception as error:
-            print(error)        
+            raise error      

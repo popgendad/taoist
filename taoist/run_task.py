@@ -26,7 +26,7 @@ async def run_task(args: ArgumentParser) -> None:
         try:
             tasks = await api.get_tasks()
         except Exception as error:
-            print(error)
+            raise error
         table_header = ["id", "content", "project", "status", "due", "labels"]
         task_list = []
         for task in tasks:
@@ -50,14 +50,14 @@ async def run_task(args: ArgumentParser) -> None:
         try:
             is_success = await api.delete_task(task_id=args.task_id)
         except Exception as error:
-            print(error)
+            raise error
         if is_success:
             print(f"Task {args.task_id} deleted")
     elif args.subcommand == "done":
         try:
             is_success = await api.close_task(task_id=args.task_id)
         except Exception as error:
-            print(error)
+            raise error
         if is_success:
             print(f"Task {args.task_id} marked as done")
     elif args.subcommand == "view":
@@ -65,7 +65,7 @@ async def run_task(args: ArgumentParser) -> None:
         try:
             task = await api.get_task(task_id=args.task_id)
         except Exception as error:
-            print(error)
+            raise error
         task_dict = task.to_dict()
         view_list.append(["Name", task_dict['content']])
         project_path_string = parent_project(task.project_id, project_dict)
@@ -86,13 +86,13 @@ async def run_task(args: ArgumentParser) -> None:
         try:
             task = await api.get_task(task_id=args.task_id)
         except Exception as error:
-            print(error)
+            raise error
         new_list = task.label_ids
         new_list.append(args.label_id)
         try:
             is_success = await api.update_task(task_id=args.task_id, label_ids=new_list)
         except Exception as error:
-            print(error)
+            raise error
         if is_success:
             print("Label successfully added to task")
     elif args.subcommand == "create":
@@ -106,4 +106,4 @@ async def run_task(args: ArgumentParser) -> None:
             )
             print(task)
         except Exception as error:
-            print(error)
+            raise error

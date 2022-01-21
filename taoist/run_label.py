@@ -29,7 +29,7 @@ async def run_label(args: ArgumentParser) -> None:
         try:
             label = await api.add_label(name=args.label_name)
         except Exception as error:
-            print(error)
+            raise error
     elif args.subcommand == "delete":
         api = TodoistAPIAsync(config['Default']['token'])
         try:
@@ -37,4 +37,4 @@ async def run_label(args: ArgumentParser) -> None:
             if is_success:
                 print(f"Deleted project {label_dict[args.label_id].name}")
         except Exception as error:
-            print(error)   
+            raise error 

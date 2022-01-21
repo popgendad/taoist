@@ -4,7 +4,6 @@ from configparser import ConfigParser
 from todoist_api_python.api_async import TodoistAPIAsync
 
 async def read_label_dict(config: ConfigParser) -> Dict:
-
     """
     Read label list into dictionary
     """
@@ -19,7 +18,7 @@ async def read_label_dict(config: ConfigParser) -> Dict:
     try:
         labels = await api.get_labels()
     except Exception as error:
-        print(error)
+        raise error
     
     for label in labels:
         label_dict[label.id] = label
