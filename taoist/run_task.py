@@ -46,23 +46,26 @@ async def run_task(args: ArgumentParser) -> None:
         task_list.sort(key=lambda x: x[4])
         print(tabulate(task_list, headers=table_header))
     elif args.subcommand == "delete":
+        task_id = args.task_id if args.task_id else int(input("Enter task ID: "))
         try:
-            is_success = await api.delete_task(task_id=args.task_id)
+            is_success = await api.delete_task(task_id=task_id)
         except Exception as error:
             raise error
         if is_success:
-            print(f"Task {args.task_id} deleted")
+            print(f"Successfully deleted task {task_id}")
     elif args.subcommand == "done":
+        task_id = args.task_id if args.task_id else int(input("Enter task ID: "))
         try:
-            is_success = await api.close_task(task_id=args.task_id)
+            is_success = await api.close_task(task_id=task_id)
         except Exception as error:
             raise error
         if is_success:
-            print(f"Task {args.task_id} marked as done")
+            print(f"Successfully marked task {task_id} as done")
     elif args.subcommand == "view":
+        task_id = args.task_id if args.task_id else int(input("Enter task ID: "))
         view_list = []
         try:
-            task = await api.get_task(task_id=args.task_id)
+            task = await api.get_task(task_id=task_id)
         except Exception as error:
             raise error
         task_dict = task.to_dict()
@@ -82,27 +85,33 @@ async def run_task(args: ArgumentParser) -> None:
             view_list.append(["Labels", label_string])
         print(tabulate(view_list))
     elif args.subcommand == "label":
+        task_id = args.task_id if args.task_id else int(input("Enter task ID: "))
+        label_id = args.label_id if args.label_id else int(input("Enter label ID: "))
         try:
-            task = await api.get_task(task_id=args.task_id)
+            task = await api.get_task(task_id=task_id)
         except Exception as error:
             raise error
         new_list = task.label_ids
-        new_list.append(args.label_id)
+        new_list.append(label_id)
         try:
-            is_success = await api.update_task(task_id=args.task_id, label_ids=new_list)
+            is_success = await api.update_task(task_id=task_id, label_ids=new_list)
         except Exception as error:
             raise error
         if is_success:
-            print("Successfully added label to task")
+            print(f"Successfully added label {label_id} to task {task_id}")
     elif args.subcommand == "create":
+        task_name = args.task_name if args.task_name else input("Enter task name: ")
+        for key, val in project_dict.items():
+            if val.name == args.project_name:
+                project_id = key
         try:
             task = await api.add_task(
-                content=args.content,
+                content=task_name,
                 due_string=args.due,
-                project_id=args.project,
+                project_id=project_id,
                 due_lang='en',
                 priority=args.priority,
             )
         except Exception as error:
             raise error
-        print(f"Successfully created task \"{args.content}\"")
+        print(f"Successfully created task \"{task_name}\"")
