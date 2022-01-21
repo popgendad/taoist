@@ -65,11 +65,6 @@ def parse_args() -> argparse.ArgumentParser:
 
     # Parse task/list
     task_list_subparser = task_subparser.add_parser("list", help="list active tasks")
-    task_list_subparser.add_argument(
-        "--sort",
-        action="store_true",
-        help="sort tasks by due date",
-    )
 
     # Parse task/view
     task_view_subparser = task_subparser.add_parser("view", help="view task details")
