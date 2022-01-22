@@ -9,7 +9,7 @@ def parse_args() -> argparse.ArgumentParser:
     """
 
     parser = argparse.ArgumentParser(
-        prog="taoist", description="Command line interface for Todoist"
+        prog="taoist", description="Command line utility for Todoist"
     )
     parser.add_argument("--version", action="version", version=__version__)
     subparsers = parser.add_subparsers(dest="command", help="Commands")
