@@ -33,16 +33,23 @@ async def run_task(args: ArgumentParser) -> None:
             if task.completed:
                 status = "Done"
             label_list = []
+            if args.label_id:
+                is_print = False
+            else:
+                is_print = True
             for lab in task.label_ids:
-                label_list.append(label_dict[lab].name)
+                if is_print == False and lab == args.label_id:
+                    is_print = True
+                label_list.append(label_dict[lab].name) 
             label_string = ','.join(label_list)
             if task.due:
                 due_date = task.due.date
             else:
                 due_date = ""
             project_path_string = parent_project(task.project_id, project_dict)
-            row = [task.id, task.content, project_path_string, status, due_date, label_string]
-            task_list.append(row)
+            if is_print:
+                row = [task.id, task.content, project_path_string, status, due_date, label_string]
+                task_list.append(row)
         task_list.sort(key=lambda x: x[4])
         print(tabulate(task_list, headers=table_header))
     elif args.subcommand == "delete":

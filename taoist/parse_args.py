@@ -67,6 +67,14 @@ def parse_args() -> argparse.ArgumentParser:
 
     # Parse task/list
     task_list_subparser = task_subparser.add_parser("list", help="list active tasks")
+    task_list_subparser.add_argument(
+        "--label-id",
+        dest="label_id",
+        action="store",
+        metavar="INT",
+        type=int,
+        help="list only task with given label ID",
+    )
 
     # Parse task/view
     task_view_subparser = task_subparser.add_parser("view", help="view task details")
