@@ -11,7 +11,7 @@ setup(
     author="Daniel Garrigan",
     author_email="popgendad@gmail.com",
     description="Command line utility for Todoist",
-    license_files = ('LICENSE',),
+    license='MIT',
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/popgendad/taoist",
