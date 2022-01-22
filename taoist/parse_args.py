@@ -75,6 +75,14 @@ def parse_args() -> argparse.ArgumentParser:
         type=int,
         help="list only task with given label ID",
     )
+    task_list_subparser.add_argument(
+        "--project-id",
+        dest="project_id",
+        action="store",
+        metavar="INT",
+        type=int,
+        help="list only task from a given project",
+    )
 
     # Parse task/view
     task_view_subparser = task_subparser.add_parser("view", help="view task details")

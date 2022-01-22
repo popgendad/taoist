@@ -34,12 +34,18 @@ async def run_task(args: ArgumentParser) -> None:
                 status = "Done"
             label_list = []
             if args.label_id:
-                is_print = False
+                pass_label_filter = False
             else:
-                is_print = True
+                pass_label_filter = True
+            if args.project_id:
+                pass_project_filter = False
+            else:
+                pass_project_filter = True
+            if pass_project_filter == False and task.project_id == args.project_id:
+                pass_project_filter = True
             for lab in task.label_ids:
-                if is_print == False and lab == args.label_id:
-                    is_print = True
+                if pass_label_filter == False and lab == args.label_id:
+                    pass_label_filter = True
                 label_list.append(label_dict[lab].name) 
             label_string = ','.join(label_list)
             if task.due:
@@ -47,7 +53,7 @@ async def run_task(args: ArgumentParser) -> None:
             else:
                 due_date = ""
             project_path_string = parent_project(task.project_id, project_dict)
-            if is_print:
+            if pass_label_filter and pass_project_filter:
                 row = [task.id, task.content, project_path_string, status, due_date, label_string]
                 task_list.append(row)
         task_list.sort(key=lambda x: x[4])
