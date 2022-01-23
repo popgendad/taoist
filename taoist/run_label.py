@@ -3,7 +3,6 @@
 from argparse import ArgumentParser
 from tabulate import tabulate
 from termcolor import colored
-from todoist_api_python.api_async import TodoistAPIAsync
 from taoist.read_project_dict import read_project_dict
 from taoist.read_label_dict import read_label_dict
 
@@ -14,7 +13,7 @@ async def run_label(args: ArgumentParser) -> None:
     """
 
     # Read config and project list
-    api, project_dict = await read_project_dict()
+    api, _ = await read_project_dict()
 
     # Read label list into dictionary
     label_dict = await read_label_dict(api)
