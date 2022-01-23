@@ -12,7 +12,7 @@ def parse_args() -> argparse.ArgumentParser:
 
     # Define main parser
     parser = argparse.ArgumentParser(
-        prog="taoist", description="Command line utility for Todoist"
+        prog="taoist", description="Python-based Terminal Utility for Todoist"
     )
 
     parser.add_argument("--version", action="version", version=__version__)

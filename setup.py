@@ -12,7 +12,7 @@ setup(
     version=__version__,
     author="Daniel Garrigan",
     author_email="popgendad@gmail.com",
-    description="Command line utility for Todoist",
+    description="Python-based Terminal Utility for Todoist",
     license='MIT',
     long_description=long_description,
     long_description_content_type="text/markdown",
