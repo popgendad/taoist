@@ -14,10 +14,7 @@ async def run_project(args: ArgumentParser) -> None:
     """
 
     # Read config and project list
-    config, project_dict = await read_project_dict()
-
-    # Initialize Todoist API
-    api = TodoistAPIAsync(config['Default']['token'])
+    api, project_dict = await read_project_dict()
 
     # Process subcommand
     if args.subcommand == "list":

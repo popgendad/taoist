@@ -5,13 +5,10 @@ from configparser import ConfigParser
 from todoist_api_python.api_async import TodoistAPIAsync
 
 
-async def read_label_dict(config: ConfigParser) -> Dict:
+async def read_label_dict(api: TodoistAPIAsync) -> Dict:
     """
     Read label list into dictionary
     """
-
-    # Initialize Todoist API
-    api = TodoistAPIAsync(config['Default']['token'])
 
     # Initialize label dictionary
     label_dict = {}

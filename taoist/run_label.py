@@ -14,13 +14,10 @@ async def run_label(args: ArgumentParser) -> None:
     """
 
     # Read config and project list
-    config, project_dict = await read_project_dict()
+    api, project_dict = await read_project_dict()
 
     # Read label list into dictionary
-    label_dict = await read_label_dict(config)
-
-    # Initialize Todoist API
-    api = TodoistAPIAsync(config['Default']['token'])
+    label_dict = await read_label_dict(api)
 
     # Process subcommand
     if args.subcommand == "list":

@@ -29,4 +29,4 @@ async def read_project_dict() -> Tuple:
     for project in projects:
         project_dict[project.id] = project
 
-    return config, project_dict
+    return api, project_dict
