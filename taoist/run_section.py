@@ -2,6 +2,7 @@
 
 from argparse import ArgumentParser
 from tabulate import tabulate
+from termcolor import colored
 from todoist_api_python.api_async import TodoistAPIAsync
 from taoist.read_project_dict import read_project_dict
 from taoist.parent_project import parent_project
@@ -29,7 +30,11 @@ async def run_section(args: ArgumentParser) -> None:
         table_header = ["id", "name", "project"]
         section_list = []
         for section in sections:
-            row = [section.id, section.name, project_path_string]
+            row = [
+                section.id,
+                colored(section.name, 'white', attrs=['bold']),
+                project_path_string
+            ]
             section_list.append(row)
         print(tabulate(section_list, headers=table_header))
     elif args.subcommand == "create":
