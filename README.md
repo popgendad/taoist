@@ -8,13 +8,13 @@ a ["getting-things-done"](https://todoist.com/productivity-methods/getting-thing
 Quick Start
 -----------
 
-The taoist package can be install via PyPi
+The taoist package can be installed via PyPi
 ```
 $ pip3 install taoist
 ```
 
-Next, connect `taoist` to your Todoist account. First you must retrieve the API token from the Todoist app.
-Once you have the API token, you run
+Next, connect `taoist` to your Todoist account. First you must retrieve your API token from the Todoist app.
+Once you have your API token, you can authenticate to the web service by running
 ```
 taoist init --token <TOKEN>
 ```
