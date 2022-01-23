@@ -1,6 +1,8 @@
 """parse_args.py"""
+
 import sys
 import argparse
+
 from taoist import __version__
 
 def parse_args() -> argparse.ArgumentParser:
@@ -8,10 +10,14 @@ def parse_args() -> argparse.ArgumentParser:
     Parse arguments for taoist program
     """
 
+    # Define main parser
     parser = argparse.ArgumentParser(
         prog="taoist", description="Command line utility for Todoist"
     )
+
     parser.add_argument("--version", action="version", version=__version__)
+
+    # Define main subparser
     subparsers = parser.add_subparsers(dest="command", help="Commands")
 
     # Define parser for init command
@@ -156,6 +162,7 @@ def parse_args() -> argparse.ArgumentParser:
         type=int,
         help="id of existing task to add label",
     )
+    
     task_label_subparser.add_argument(
         "--label-id",
         dest="label_id",

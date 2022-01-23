@@ -1,5 +1,6 @@
 """taoist_main.py"""
-import asyncio
+
+from asyncio import get_event_loop
 from taoist.parse_args import parse_args
 from taoist.run_task import run_task
 from taoist.run_project import run_project
@@ -16,7 +17,7 @@ def main():
     args = parse_args()
 
     # Get the current event loop
-    loop = asyncio.get_event_loop()
+    loop = get_event_loop()
 
     # Fork execution stream
     if args.command == "project":
@@ -31,6 +32,7 @@ def main():
         loop.run_until_complete(run_section(args))
     else:
         raise Exception(f"Command {args.command} not recognized")
+
 
 if __name__ == "__main__":
     main()

@@ -1,8 +1,11 @@
 """read_config.py"""
+
 import sys
 import os
+
 from pathlib import Path
 from configparser import ConfigParser
+
 
 def read_config() -> ConfigParser:
     """

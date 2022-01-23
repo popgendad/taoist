@@ -1,7 +1,9 @@
 """"read_label_dict.py"""
+
 from typing import Dict
 from configparser import ConfigParser
 from todoist_api_python.api_async import TodoistAPIAsync
+
 
 async def read_label_dict(config: ConfigParser) -> Dict:
     """
@@ -20,6 +22,7 @@ async def read_label_dict(config: ConfigParser) -> Dict:
     except Exception as error:
         raise error
     
+    # Construct label dictionary
     for label in labels:
         label_dict[label.id] = label
     

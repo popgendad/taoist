@@ -1,6 +1,8 @@
 """setup.py"""
+
 from setuptools import setup
 from taoist import __version__
+
 
 with open("README.md", "r") as fh:
     long_description = fh.read()

@@ -1,10 +1,13 @@
 """run_init.py"""
+
 import os
-import argparse
+
+from argparse import ArgumentParser
 from pathlib import Path
 from configparser import ConfigParser
 
-def run_init(args: argparse.ArgumentParser) -> None:
+
+def run_init(args: ArgumentParser) -> None:
     """
     Initialize Todoist account with API token
     """

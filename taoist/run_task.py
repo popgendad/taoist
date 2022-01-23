@@ -1,10 +1,12 @@
 """run_task.py"""
+
 from argparse import ArgumentParser
 from tabulate import tabulate
 from todoist_api_python.api_async import TodoistAPIAsync
 from taoist.read_project_dict import read_project_dict
 from taoist.read_label_dict import read_label_dict
 from taoist.parent_project import parent_project
+
 
 async def run_task(args: ArgumentParser) -> None:
     """
@@ -29,18 +31,10 @@ async def run_task(args: ArgumentParser) -> None:
         table_header = ["id", "content", "project", "status", "due", "labels"]
         task_list = []
         for task in tasks:
-            status = "Open"
-            if task.completed:
-                status = "Done"
             label_list = []
-            if args.label_id:
-                pass_label_filter = False
-            else:
-                pass_label_filter = True
-            if args.project_id:
-                pass_project_filter = False
-            else:
-                pass_project_filter = True
+            status = "Done" if task.completed else "Open"
+            pass_label_filter = False if args.label_id else True
+            pass_project_filter = False if args.project_id else True
             if pass_project_filter == False and task.project_id == args.project_id:
                 pass_project_filter = True
             for lab in task.label_ids:

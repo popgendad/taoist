@@ -1,9 +1,11 @@
 """run_project.py"""
+
 from argparse import ArgumentParser
 from tabulate import tabulate
 from todoist_api_python.api_async import TodoistAPIAsync
 from taoist.read_project_dict import read_project_dict
 from taoist.parent_project import parent_project
+
 
 async def run_project(args: ArgumentParser) -> None:
     """
