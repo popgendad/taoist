@@ -2,6 +2,7 @@
 
 from argparse import ArgumentParser
 from tabulate import tabulate
+from termcolor import colored
 from todoist_api_python.api_async import TodoistAPIAsync
 from taoist.read_project_dict import read_project_dict
 from taoist.read_label_dict import read_label_dict
@@ -48,7 +49,14 @@ async def run_task(args: ArgumentParser) -> None:
                 due_date = ""
             project_path_string = parent_project(task.project_id, project_dict)
             if pass_label_filter and pass_project_filter:
-                row = [task.id, task.content, project_path_string, status, due_date, label_string]
+                row = [
+                    task.id,
+                    colored(task.content, 'white', attrs=['bold']),
+                    project_path_string,
+                    status,
+                    due_date,
+                    label_string
+                ]
                 task_list.append(row)
         task_list.sort(key=lambda x: x[4])
         print(tabulate(task_list, headers=table_header))

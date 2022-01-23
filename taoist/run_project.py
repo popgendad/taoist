@@ -2,6 +2,7 @@
 
 from argparse import ArgumentParser
 from tabulate import tabulate
+from termcolor import colored
 from todoist_api_python.api_async import TodoistAPIAsync
 from taoist.read_project_dict import read_project_dict
 from taoist.parent_project import parent_project
@@ -24,7 +25,10 @@ async def run_project(args: ArgumentParser) -> None:
         project_list = []
         for key in project_dict.keys():
             project_path_string = parent_project(key, project_dict) 
-            row = [key, project_path_string]
+            row = [
+                key,
+                colored(project_path_string, 'white', attrs=['bold'])
+            ]
             project_list.append(row)
         print(tabulate(project_list, headers=table_header))
     elif args.subcommand == "create":

@@ -2,6 +2,7 @@
 
 from argparse import ArgumentParser
 from tabulate import tabulate
+from termcolor import colored
 from todoist_api_python.api_async import TodoistAPIAsync
 from taoist.read_project_dict import read_project_dict
 from taoist.read_label_dict import read_label_dict
@@ -26,7 +27,10 @@ async def run_label(args: ArgumentParser) -> None:
         table_header = ["id", "name"]
         label_list = []
         for key, label in label_dict.items():
-            row = [key, label.name]
+            row = [
+                key,
+                colored(label.name, 'white', attrs=['bold'])
+            ]
             label_list.append(row)
         print(tabulate(label_list, headers=table_header))
     elif args.subcommand == "create":
