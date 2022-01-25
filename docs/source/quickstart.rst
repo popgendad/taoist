@@ -12,7 +12,7 @@ The taoist package can be installed via PyPi
 
    $ pip install taoist
 
-.. _examples
+.. _examples:
 
 Examples
 --------

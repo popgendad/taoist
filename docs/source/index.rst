@@ -9,8 +9,8 @@ Todoist projects, sections, labels and tasks. The goal of the project is to enab
 major components of a `getting-things-done <https://todoist.com/productivity-methods/getting-things-done>`_
 workflow from a terminal environment and is not intended to replicate the functionality of the Todoist app.
 
-Check out the :doc:`quickstart` section for further information, including
-how to :ref:`installation` the project and :ref:`examples` for examples.
+Check out the :doc:`quickstart` section for further information, including :ref:`installation` 
+and :ref:`examples`.
 
 .. note::
 
