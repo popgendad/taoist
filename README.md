@@ -1,4 +1,6 @@
-# taoist: Python-based Terminal Utility for Todoist
+<img src="docs/source/images/taijitu.png" width="100" />
+
+# Taoist: Python-based Terminal Utility for Todoist
 
 [![Upload Python Package](https://github.com/popgendad/taoist/actions/workflows/python-publish.yml/badge.svg)](https://github.com/popgendad/taoist/actions/workflows/python-publish.yml)
 [![Documentation Status](https://readthedocs.org/projects/taoist/badge/?version=latest)](https://taoist.readthedocs.io/en/latest/?badge=latest)
