@@ -1,7 +1,7 @@
 Working with Tasks
 ==================
 
-The ``taoist`` utility can perform the following task-related requests::
+The ``taoist`` utility can perform the following task-related requests:
 
 #. `list`: list user's tasks
 

@@ -1,7 +1,7 @@
 Working with Projects
 =====================
 
-The ``taoist`` utility currently has the functionality to perform the following project-related requests::
+The ``taoist`` utility currently has the functionality to perform the following project-related requests:
 
 #. `list`: list user's projects
 

@@ -1,7 +1,7 @@
 Working with Sections
 =====================
 
-The ``taoist`` utility currently has the functionality to perform the following section-related requests::
+The ``taoist`` utility currently has the functionality to perform the following section-related requests:
 
 #. `list`: list sections within a given project
 

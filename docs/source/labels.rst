@@ -1,7 +1,7 @@
 Working with Labels
 ===================
 
-The ``taoist`` utility currently has the functionality to perform the following label-related requests::
+The ``taoist`` utility currently has the functionality to perform the following label-related requests:
 
 #. `list`: list user's labels
 
