@@ -1,5 +1,5 @@
 .. image:: images/taijitu.png
-   :width: 400
+   :width: 100
 
 
 Taoist: Python-based Terminal Utility for Todoist
