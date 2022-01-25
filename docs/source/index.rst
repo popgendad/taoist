@@ -1,4 +1,8 @@
-taoist: Python-based Terminal Utility for Todoist
+.. image:: images/taijitu.png
+   :width: 400
+
+
+Taoist: Python-based Terminal Utility for Todoist
 =================================================
  
 ``Taoist`` is a simple command line utility that relies on the 
