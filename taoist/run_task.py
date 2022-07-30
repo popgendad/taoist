@@ -25,37 +25,40 @@ async def run_task(args: ArgumentParser) -> None:
             tasks = await api.get_tasks()
         except Exception as error:
             raise error
-        table_header = ["id", "content", "project", "status", "due", "labels"]
-        task_list = []
-        for task in tasks:
-            label_list = []
-            status = "Done" if task.completed else "Open"
-            pass_label_filter = False if args.label_id else True
-            pass_project_filter = False if args.project_id else True
-            if pass_project_filter == False and task.project_id == args.project_id:
-                pass_project_filter = True
-            for lab in task.label_ids:
-                if pass_label_filter == False and lab == args.label_id:
-                    pass_label_filter = True
-                label_list.append(label_dict[lab].name) 
-            label_string = ','.join(label_list)
-            if task.due:
-                due_date = task.due.date
-            else:
-                due_date = ""
-            project_path_string = parent_project(task.project_id, project_dict)
-            if pass_label_filter and pass_project_filter:
-                row = [
-                    task.id,
-                    colored(task.content, 'white', attrs=['bold']),
-                    project_path_string,
-                    status,
-                    due_date,
-                    label_string
-                ]
-                task_list.append(row)
-        task_list.sort(key=lambda x: x[4])
-        print(tabulate(task_list, headers=table_header))
+        if len(tasks) < 1:
+            print("No tasks found")
+        else:
+            table_header = ["id", "content", "project", "status", "due", "labels"]
+            task_list = []
+            for task in tasks:
+                label_list = []
+                status = "Done" if task.completed else "Open"
+                pass_label_filter = False if args.label_id else True
+                pass_project_filter = False if args.project_id else True
+                if pass_project_filter == False and task.project_id == args.project_id:
+                    pass_project_filter = True
+                for lab in task.label_ids:
+                    if pass_label_filter == False and lab == args.label_id:
+                        pass_label_filter = True
+                    label_list.append(label_dict[lab].name) 
+                label_string = ','.join(label_list)
+                if task.due:
+                    due_date = task.due.date
+                else:
+                    due_date = ""
+                project_path_string = parent_project(task.project_id, project_dict)
+                if pass_label_filter and pass_project_filter:
+                    row = [
+                        task.id,
+                        colored(task.content, 'white', attrs=['bold']),
+                        project_path_string,
+                        status,
+                        due_date,
+                        label_string
+                    ]
+                    task_list.append(row)
+            task_list.sort(key=lambda x: x[4])
+            print(tabulate(task_list, headers=table_header))
     elif args.subcommand == "delete":
         task_id = args.task_id if args.task_id else int(input("Enter task ID: "))
         try:
